@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
                         serialize=False,
                     ),
                 ),
-                ("url", models.URLField()),
                 ("title", models.CharField(max_length=255)),
                 ("width", models.PositiveSmallIntegerField()),
                 ("height", models.PositiveSmallIntegerField()),
