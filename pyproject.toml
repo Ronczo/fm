@@ -7,6 +7,7 @@ authors = ["Marcin Jarosiński <marcin.jarosinski@stxnext.pl>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = "^4.1.4"
+djangorestframework = "^3.14.0"
 
 [tool.poetry.dev-dependencies]
 
