@@ -11,6 +11,8 @@ djangorestframework = "^3.14.0"
 psycopg2 = "^2.9.5"
 python-dotenv = "^0.21.0"
 django-filter = "^22.1"
+django-storages = "^1.13.2"
+boto3 = "^1.26.39"
 
 [tool.poetry.dev-dependencies]
 
