@@ -39,6 +39,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-filter"
+version = "22.1"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -96,7 +107,7 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "883edeb484cc83a97575b07406d768c13d3b09d57b158bacc1282d5a2bb99394"
+content-hash = "120e5dbbe8ae6052d3974e29e4a557e1f92b8667c5372403a5a7e0d16973231b"
 
 [metadata.files]
 asgiref = []
@@ -119,6 +130,7 @@ asgiref = []
     {file = "backports.zoneinfo-0.2.1.tar.gz", hash = "sha256:fadbfe37f74051d024037f223b8e001611eac868b5c5b06144ef4d8b799862f2"},
 ]
 django = []
+django-filter = []
 djangorestframework = []
 psycopg2 = []
 python-dotenv = []
