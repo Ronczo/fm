@@ -8,6 +8,8 @@ authors = ["Marcin Jarosiński <marcin.jarosinski@stxnext.pl>"]
 python = "^3.8"
 Django = "^4.1.4"
 djangorestframework = "^3.14.0"
+psycopg2 = "^2.9.5"
+python-dotenv = "^0.21.0"
 
 [tool.poetry.dev-dependencies]
 
