@@ -28,10 +28,8 @@ class Image(models.Model):
         return f"{self.title} {self.width}x{self.height}"
 
     def save(self, *args, **kwargs):
-        if self.image_has_wrong_size():
-            self.image_resize(self.picture)
-        else:
-            super().save(*args, **kwargs)
+        self.image_resize(self.picture)
+        super().save(*args, **kwargs)
 
     def image_resize(self, image):
         img = PillowImage.open(image)
@@ -43,7 +41,7 @@ class Image(models.Model):
         buffer = BytesIO()
         new_image.save(buffer, format=image_format)
         file_object = File(buffer)
-        image.save(image_filename, file_object)
+        image.save(image_filename, file_object, save=False)
 
     def image_has_wrong_size(self):
         return self.picture.height != self.height or self.picture.width != self.width
