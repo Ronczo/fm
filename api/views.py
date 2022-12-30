@@ -11,7 +11,7 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, generics.Ge
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
     filter_backends = (rest_framework.DjangoFilterBackend,)
-    filterset_class = ImageFilter # I think it's not necessary
+    filterset_class = ImageFilter
     filterset_fields = ('title',)
 
 
