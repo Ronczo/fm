@@ -4,8 +4,7 @@ from rest_framework.response import Response
 
 from api.filters import ImageFilter
 from api.models import Image
-from api.serializers import ImageSerializer
-
+from api.serializers import ImageSerializer, ImageUploadSerializer
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, generics.GenericAPIView):
@@ -23,7 +22,7 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, generics.Ge
             return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
+        serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response("The image has been added")
