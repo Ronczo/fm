@@ -7,13 +7,14 @@ from api.models import Image
 from api.serializers import ImageSerializer, ImageUploadSerializer
 
 
-class ImageViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, generics.GenericAPIView):
+class ImageViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, generics.GenericAPIView
+):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filterset_class = ImageFilter
-    filterset_fields = ('title',)
-
+    filterset_fields = ("title",)
 
     def get(self, request, *args, **kwargs):
         if kwargs.get("pk"):
