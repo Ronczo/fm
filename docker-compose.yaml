@@ -12,11 +12,13 @@ services:
       - POSTGRES_DB
       - POSTGRES_USER
       - POSTGRES_PASSWORD
-    ports:
-      - "${POSTGRES_PORT}:5432"
+      - POSTGRES_HOST
+    networks:
+      - internal-network
+      - external-network
   web:
     build: .
-    command: poetry run python /code/manage.py runserver 0.0.0.0:8000
+    command: sh -c "poetry run python manage.py migrate && poetry run python /code/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
@@ -27,3 +29,13 @@ services:
       - POSTGRES_PASSWORD
     depends_on:
       - db
+    networks:
+      - internal-network
+      - external-network
+
+
+networks:
+  internal-network:
+    internal: true
+  external-network:
+

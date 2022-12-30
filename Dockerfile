@@ -8,7 +8,7 @@ RUN pip install --upgrade pip
 RUN pip install poetry
 COPY poetry.lock /code/
 COPY pyproject.toml /code/
-RUN echo $PYTHONPATH
 RUN poetry install
 COPY . /code/
-RUN poetry run python manage.py migrate
+
+
