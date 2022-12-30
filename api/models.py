@@ -43,8 +43,6 @@ class Image(models.Model):
         file_object = File(buffer)
         image.save(image_filename, file_object, save=False)
 
-    def image_has_wrong_size(self):
-        return self.picture.height != self.height or self.picture.width != self.width
 
     @property
     def get_picture_url(self):
