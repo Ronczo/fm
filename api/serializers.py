@@ -18,8 +18,6 @@ class ImageUploadSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         try:
-            import logging
-            logging.warning("test")
             image = attrs['picture']
             extension = str(image).split(".")[-1].lower()
             if extension not in image_types.keys():
