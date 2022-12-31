@@ -27,6 +27,3 @@ class ImageViewSet(
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response("The image has been added", status=status.HTTP_201_CREATED)
-        else:
-            return Response("Wrong request", status=status.HTTP_400_BAD_REQUEST)
-
