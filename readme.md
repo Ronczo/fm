@@ -21,7 +21,7 @@
 
 ## Setting up dev environment
 
-1. Create bucket in s3 (AWS) - make sure turning off block all public access
+1. Create bucket in s3 (AWS) - make sure to turn off block all public access
 2. Create and fill `.env` file (check `.envtemplate` file).
 3. In terminal run `docker-compose up`
 4. If everything is ok, your application should be available on host `http://127.0.0.1:8000/`
