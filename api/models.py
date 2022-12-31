@@ -18,7 +18,7 @@ class Image(models.Model):
     height = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return f"{self.title} {self.width}x{self.height}"
+        return f"{self.title} ({self.width}x{self.height})"
 
     def save(self, *args, **kwargs):
         self.image_resize(self.picture)
