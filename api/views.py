@@ -1,4 +1,6 @@
 from django_filters import rest_framework
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import mixins, generics, status
 from rest_framework.response import Response
 
@@ -14,8 +16,22 @@ class ImageViewSet(mixins.ListModelMixin, generics.GenericAPIView):
     filterset_class = ImageFilter
     filterset_fields = ("title",)
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "title",
+                OpenApiTypes.STR,
+                description="To search given title. Leave blank to not filter.",
+            ),
+    ])
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+
+    @extend_schema(
+        request=ImageUploadSerializer
+    )
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
