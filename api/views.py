@@ -1,5 +1,5 @@
 from django_filters import rest_framework
-from rest_framework import mixins, generics
+from rest_framework import mixins, generics, status
 from rest_framework.response import Response
 
 from api.filters import ImageFilter
@@ -24,6 +24,9 @@ class ImageViewSet(
 
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response("The image has been added")
+            return Response("The image has been added", status=status.HTTP_201_CREATED)
+        else:
+            return Response("Wrong request", status=status.HTTP_400_BAD_REQUEST)
+
