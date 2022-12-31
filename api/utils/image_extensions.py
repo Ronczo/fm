@@ -3,6 +3,4 @@ image_types = {
     "jpeg": "JPEG",
     "png": "PNG",
     "gif": "GIF",
-    "tif": "TIFF",
-    "tiff": "TIFF",
 }
