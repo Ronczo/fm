@@ -17,6 +17,7 @@
 8. pytest
 9. boto3
 10. OpenAPIv3
+11. drf-spectacular
 
 
 ## Setting up dev environment
@@ -24,7 +25,7 @@
 1. Create bucket in s3 (AWS) - make sure to turn off block all public access
 2. Create and fill `.env` file (check `.envtemplate` file).
 3. In terminal run `docker-compose up`
-4. If everything is ok, your application should be available on host `http://127.0.0.1:8000/`
+4. If everything is ok, your application should be available on host `http://127.0.0.1:8000/`. You should see swagger on main page.
 
 ## API endpoints
 1. [GET] http://127.0.0.1:8000/api/images - returns paginated list of stored images
