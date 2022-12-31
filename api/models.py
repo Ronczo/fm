@@ -1,25 +1,18 @@
 import uuid
-
-from django.core.files import File
+from io import BytesIO
 from pathlib import Path
 
-from io import BytesIO
-
-from django.db import models
 from PIL import Image as PillowImage
+from django.core.files import File
+from django.db import models
+from django.db.models.fields.files import ImageFieldFile
 
-image_types = {
-    "jpg": "JPEG",
-    "jpeg": "JPEG",
-    "png": "PNG",
-    "gif": "GIF",
-    "tif": "TIFF",
-    "tiff": "TIFF",
-}
+from api.utils.image_extensions import image_types
+
 
 class Image(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    picture = models.ImageField(upload_to='pictures/', null=True, blank=True)
+    picture = models.ImageField(upload_to="pictures/", null=True, blank=True)
     title = models.CharField(max_length=255)
     width = models.PositiveSmallIntegerField()
     height = models.PositiveSmallIntegerField()
@@ -31,7 +24,7 @@ class Image(models.Model):
         self.image_resize(self.picture)
         super().save(*args, **kwargs)
 
-    def image_resize(self, image):
+    def image_resize(self, image: ImageFieldFile):
         img = PillowImage.open(image)
         image_size = (self.width, self.height)
         new_image = img.resize(image_size)
@@ -43,8 +36,6 @@ class Image(models.Model):
         file_object = File(buffer)
         image.save(image_filename, file_object, save=False)
 
-
     @property
-    def get_picture_url(self):
+    def get_picture_url(self) -> str:
         return self.picture.url
-
