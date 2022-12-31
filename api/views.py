@@ -7,9 +7,7 @@ from api.models import Image
 from api.serializers import ImageSerializer, ImageUploadSerializer
 
 
-class ImageViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, generics.GenericAPIView
-):
+class ImageViewSet(mixins.ListModelMixin, generics.GenericAPIView):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
     filter_backends = (rest_framework.DjangoFilterBackend,)
@@ -17,13 +15,18 @@ class ImageViewSet(
     filterset_fields = ("title",)
 
     def get(self, request, *args, **kwargs):
-        if kwargs.get("pk"):
-            return self.retrieve(request, *args, **kwargs)
-        else:
-            return self.list(request, *args, **kwargs)
-
+        return self.list(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+
+class ImageDetailViewSet(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
