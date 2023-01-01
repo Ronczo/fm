@@ -1,6 +1,7 @@
-from django.urls import path
-from api.views import ImageViewSet, ImageDetailViewSet
-urlpatterns = [
-    path('images/', ImageViewSet.as_view()),
-    path('images/<str:pk>/', ImageDetailViewSet.as_view()),
-]
+from rest_framework.routers import DefaultRouter
+
+from api.views import ImageViewSet
+
+router = DefaultRouter()
+router.register("images", ImageViewSet, basename="image")
+urlpatterns = router.urls
