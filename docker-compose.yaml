@@ -16,6 +16,8 @@ services:
     networks:
       - internal-network
       - external-network
+    ports:
+      - "${POSTGRES_PORT}:5432"
   web:
     build: .
     command: sh -c "poetry run python manage.py migrate && poetry run python /code/manage.py runserver 0.0.0.0:8000"
@@ -29,10 +31,10 @@ services:
       - POSTGRES_PASSWORD
     depends_on:
       - db
-    networks:
-      - internal-network
-      - external-network
-
+#    networks:
+#      - internal-network
+#      - external-network
+    network_mode: host
 
 networks:
   internal-network:
