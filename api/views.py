@@ -36,9 +36,6 @@ class ImageViewSet(
 
     @extend_schema(request=ImageUploadSerializer)
     def create(self, request, *args, **kwargs):
-        import logging
-
-        logging.warning("asdasd")
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
