@@ -1,5 +1,4 @@
-
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Tuple
 
 import pytest
 from django.db.models.fields.files import ImageFieldFile
@@ -10,17 +9,31 @@ from django.conf import settings
 from api.models import Image
 
 
+@pytest.mark.parametrize(
+    "filter_settings",
+    [
+        ("", settings.REST_FRAMEWORK["PAGE_SIZE"]),
+        ("test", settings.REST_FRAMEWORK["PAGE_SIZE"]),
+        ("some_wrong_filter", 0),
+    ],
+)
 @pytest.mark.django_db
-def test_fetching_list(db, client):
-    response: Response = client.get("/api/images/")
+def test_fetching_list(db, client, filter_settings):
+    filter_param = filter_settings[0]
+    extected_response_amount = filter_settings[1]
+    response: Response = client.get(f"/api/images/?title={filter_param}")
     assert response.status_code == 200
+
+    # check pagination (if exists)
     expected_fields: List[str] = ["count", "next", "previous", "results"]
     assert all(
         field in response.data.keys() for field in expected_fields
-    )  # check pagination
+    )
+
+    # check pagination size and filtering
     assert (
-        len(response.data["results"]) == settings.REST_FRAMEWORK["PAGE_SIZE"]
-    )  # check pagination size
+        len(response.data["results"]) == extected_response_amount
+    )
     expected_fields_in_object: List[str] = ["id", "url", "title", "width", "height"]
     # Check object structure
     for obj in response.data["results"]:
@@ -62,14 +75,9 @@ def test_post_image(db, client, build_image):
 
     # check object structure
     expected_fields: List[str] = ["id", "url", "title", "width", "height"]
-    assert all(
-        field in response.data.keys() for field in expected_fields
-    )
+    assert all(field in response.data.keys() for field in expected_fields)
 
     # check response values
     for key, value in payload.items():
         if key != "picture":
             assert value == response.data[key]
-
-
-
