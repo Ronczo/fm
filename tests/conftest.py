@@ -15,7 +15,7 @@ def client():
 @pytest.fixture
 def db(image_factory):
     for _ in range(20):
-        image = image_factory.create()
+        image_factory.create()
 
 
 
