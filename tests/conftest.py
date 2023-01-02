@@ -1,5 +1,4 @@
 import pytest
-
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
 
@@ -14,15 +13,22 @@ def client():
     return APIClient()
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def db(image_factory):
-    for _ in range(20):
+    for _ in range(21):
         image_factory.create()
+
 
 @pytest.fixture
 def first_image():
     return Image.objects.first()
 
+
 @pytest.fixture
 def build_image(image_factory):
     return image_factory.build()
+
+
+@pytest.fixture
+def create_image(image_factory):
+    return image_factory.create()
