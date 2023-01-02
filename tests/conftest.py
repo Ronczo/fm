@@ -1,3 +1,6 @@
+import os
+import pathlib
+
 import pytest
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
@@ -32,3 +35,12 @@ def build_image(image_factory):
 @pytest.fixture
 def create_image(image_factory):
     return image_factory.create()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def cleanup():
+    yield None
+    filepath = pathlib.Path(__file__).resolve().parent.parent
+    for file in os.listdir(f"{filepath}/pictures"):
+        os.remove(f"{filepath}/pictures/{file}")
+    os.rmdir(f"{filepath}/pictures")
