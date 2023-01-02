@@ -1,10 +1,9 @@
-from typing import List, Dict, Union, Tuple
+from typing import List, Dict, Union
 
 import pytest
+from django.conf import settings
 from django.db.models.fields.files import ImageFieldFile
 from rest_framework.response import Response
-
-from django.conf import settings
 
 from api.models import Image
 
@@ -18,7 +17,7 @@ from api.models import Image
     ],
 )
 @pytest.mark.django_db
-def test_fetching_list(db, client, filter_settings):
+def test_fetching_list(client, filter_settings):
     filter_param = filter_settings[0]
     extected_response_amount = filter_settings[1]
     response: Response = client.get(f"/api/images/?title={filter_param}")
@@ -37,7 +36,7 @@ def test_fetching_list(db, client, filter_settings):
 
 
 @pytest.mark.django_db
-def test_fetching_retrieve(db, client, first_image):
+def test_fetching_retrieve(client, first_image):
     response: Response = client.get(f"/api/images/{first_image.id}/")
 
     assert response.status_code == 200
@@ -57,7 +56,7 @@ def test_fetching_retrieve(db, client, first_image):
 
 
 @pytest.mark.django_db
-def test_post_image(db, client, build_image):
+def test_post_image(client, build_image):
     image_amount_in_db: int = Image.objects.all().count()
     payload: Dict[str, Union[str, int, ImageFieldFile]] = {
         "title": build_image.title,
