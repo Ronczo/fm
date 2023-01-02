@@ -2,10 +2,10 @@ import uuid
 from io import BytesIO
 from pathlib import Path
 
-from PIL import Image as PillowImage
 from django.core.files import File
 from django.db import models
 from django.db.models.fields.files import ImageFieldFile
+from PIL import Image as PillowImage
 
 from api.utils.image_extensions import image_types
 

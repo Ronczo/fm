@@ -245,6 +245,20 @@ optional = false
 python-versions = ">=2.7, >=3.5"
 
 [[package]]
+name = "isort"
+version = "5.11.4"
+description = "A Python utility / library to sort Python imports."
+category = "main"
+optional = false
+python-versions = ">=3.7.0"
+
+[package.extras]
+colors = ["colorama (>=0.4.3,<0.5.0)"]
+requirements-deprecated-finder = ["pip-api", "pipreqs"]
+pipfile-deprecated-finder = ["pipreqs", "requirementslib"]
+plugins = ["setuptools"]
+
+[[package]]
 name = "jmespath"
 version = "1.0.1"
 description = "JSON Matching Expressions"
@@ -503,7 +517,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a5a30974e199165b619e1d1de0e6d02b8d9c50725159caebb62435c793784606"
+content-hash = "e271d2758eb7f3acadbb6d50bcacb58174e339b439aca9210cb435de8c900e34"
 
 [metadata.files]
 asgiref = []
@@ -542,6 +556,7 @@ importlib-resources = []
 inflection = []
 iniconfig = []
 install = []
+isort = []
 jmespath = []
 jsonschema = []
 packaging = []
