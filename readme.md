@@ -43,4 +43,4 @@ title - text<br />width - text<br />height - text<br />picture - file/image
 
 ## Tests
 
-To run tests type `pytest tests`
+To run tests type `pytest tests` (make sure you are in poetry shell)
