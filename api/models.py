@@ -25,15 +25,15 @@ class Image(models.Model):
         super().save(*args, **kwargs)
 
     def image_resize(self, image: ImageFieldFile):
-        img = PillowImage.open(image)
-        image_size = (self.width, self.height)
-        new_image = img.resize(image_size)
-        image_extension = Path(image.file.name).name.split(".")[-1]
-        image_filename = f"{self.id}.{image_extension}"
-        image_format = image_types[image_extension]
-        buffer = BytesIO()
+        img: PillowImage = PillowImage.open(image)
+        image_size: tuple = (self.width, self.height)
+        new_image: PillowImage = img.resize(image_size)
+        image_extension: str = Path(image.file.name).name.split(".")[-1]
+        image_filename: str = f"{self.id}.{image_extension}"
+        image_format: str = image_types[image_extension]
+        buffer: BytesIO = BytesIO()
         new_image.save(buffer, format=image_format)
-        file_object = File(buffer)
+        file_object: File = File(buffer)
         image.save(image_filename, file_object, save=False)
 
     @property
