@@ -38,5 +38,6 @@ class ImageViewSet(
     def create(self, request, *args, **kwargs):
         serializer = ImageUploadSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            instance = serializer.save()
+            read_serializer = self.serializer_class(instance=instance)
+            return Response(read_serializer.data, status=status.HTTP_201_CREATED)
