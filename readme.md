@@ -26,6 +26,8 @@
 2. Create and fill `.env` file (check `.envtemplate` file).
 3. In terminal run `docker-compose up`
 4. If everything is ok, your application should be available on host `http://127.0.0.1:8000/`. You should see swagger on main page.
+5. Only for testing - enter poetry shell `poetry shell`
+6. Install requirements `poetry install`
 
 ## API endpoints
 1. [GET] http://127.0.0.1:8000/api/images - returns paginated list of stored images
@@ -41,4 +43,4 @@ title - text<br />width - text<br />height - text<br />picture - file/image
 
 ## Tests
 
-To run test type `pytest ...` # TODO: update this section!
+To run tests type `pytest tests`
