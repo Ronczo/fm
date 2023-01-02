@@ -114,4 +114,5 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend"),
     "DEFAULT_SCHEMA_CLASS": 'drf_spectacular.openapi.AutoSchema'
 }
-DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
+# I tried with this, but one test failed. IMO it's better to have working test and mess in files :)
+# DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
