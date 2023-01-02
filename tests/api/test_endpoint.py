@@ -60,8 +60,8 @@ def test_post_image(client, build_image):
     image_amount_in_db: int = Image.objects.all().count()
     payload: Dict[str, Union[str, int, ImageFieldFile]] = {
         "title": build_image.title,
-        "width": build_image.width,
-        "height": build_image.height,
+        "width": 100,
+        "height": 100,
         "picture": build_image.picture,
     }
     response: Response = client.post(f"/api/images/", payload)
@@ -78,3 +78,8 @@ def test_post_image(client, build_image):
     for key, value in payload.items():
         if key != "picture":
             assert value == response.data[key]
+
+    # check resizing
+    added_image = Image.objects.get(id=response.data['id'])
+    assert added_image.picture.height == 100
+    assert added_image.picture.width == 100
