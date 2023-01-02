@@ -26,14 +26,10 @@ def test_fetching_list(db, client, filter_settings):
 
     # check pagination (if exists)
     expected_fields: List[str] = ["count", "next", "previous", "results"]
-    assert all(
-        field in response.data.keys() for field in expected_fields
-    )
+    assert all(field in response.data.keys() for field in expected_fields)
 
     # check pagination size and filtering
-    assert (
-        len(response.data["results"]) == extected_response_amount
-    )
+    assert len(response.data["results"]) == extected_response_amount
     expected_fields_in_object: List[str] = ["id", "url", "title", "width", "height"]
     # Check object structure
     for obj in response.data["results"]:
@@ -45,6 +41,7 @@ def test_fetching_retrieve(db, client, first_image):
     response: Response = client.get(f"/api/images/{first_image.id}/")
 
     assert response.status_code == 200
+    # check response structure
     expected_fields: List[str] = ["id", "url", "title", "width", "height"]
     assert all(field in response.data.keys() for field in expected_fields)
 
@@ -55,6 +52,7 @@ def test_fetching_retrieve(db, client, first_image):
         "width": first_image.width,
         "height": first_image.height,
     }
+    # check response values
     assert sorted(payload) == sorted(response.data)
 
 
